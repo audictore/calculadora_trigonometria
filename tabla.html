@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabla Trigonométrica — Calculadora Trigonométrica</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="tabla.css">
+</head>
+<body>
+    <nav class="app-nav">
+        <a href="index.html" class="nav-link">⚡ Calculadora en vivo</a>
+        <a href="formulario.html" class="nav-link">📋 Formulario guiado</a>
+        <a href="pitagoras.html" class="nav-link">📐 Pitágoras</a>
+        <a href="tabla.html" class="nav-link active">📊 Tabla trig.</a>
+    </nav>
+
+    <header class="app-header">
+        <h1>Tabla Trigonométrica</h1>
+        <p class="subtitle">Valores exactos, funciones inversas y calculadora de razones</p>
+    </header>
+
+    <main class="tabla-main">
+
+        <!-- ── Ángulos especiales ────────────────────────────── -->
+        <section class="tab-section">
+            <h2 class="tab-title">Ángulos Especiales</h2>
+            <p class="tab-hint">Valores exactos y decimales de las 6 razones trigonométricas.</p>
+            <div class="tab-scroll">
+                <table class="spec-table" id="spec-table">
+                    <thead>
+                        <tr>
+                            <th class="ang-col">Ángulo</th>
+                            <th class="rad-col">rad</th>
+                            <th>sen</th>
+                            <th>cos</th>
+                            <th>tan</th>
+                            <th>cot</th>
+                            <th>sec</th>
+                            <th>csc</th>
+                        </tr>
+                    </thead>
+                    <tbody id="spec-tbody"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ── Funciones inversas ────────────────────────────── -->
+        <section class="tab-section">
+            <h2 class="tab-title">Funciones Inversas — Valores Notables</h2>
+            <p class="tab-hint">arcsen (dominio [−1, 1] → rango [−90°, 90°]) &nbsp;·&nbsp; arccos (dominio [−1, 1] → rango [0°, 180°]) &nbsp;·&nbsp; arctan (dominio ℝ → rango (−90°, 90°))</p>
+
+            <div class="inv-tables-wrap">
+                <!-- arcsen + arccos comparten dominio -->
+                <div class="inv-sub">
+                    <h3 class="inv-sub-title">arcsen y arccos</h3>
+                    <div class="tab-scroll">
+                        <table class="inv-table" id="inv-sincos-table">
+                            <thead>
+                                <tr>
+                                    <th>Valor</th>
+                                    <th>Exacto</th>
+                                    <th>arcsen (°)</th>
+                                    <th>arcsen (rad)</th>
+                                    <th>arccos (°)</th>
+                                    <th>arccos (rad)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="inv-sincos-tbody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- arctan -->
+                <div class="inv-sub">
+                    <h3 class="inv-sub-title">arctan</h3>
+                    <div class="tab-scroll">
+                        <table class="inv-table" id="inv-tan-table">
+                            <thead>
+                                <tr>
+                                    <th>Valor</th>
+                                    <th>Exacto</th>
+                                    <th>arctan (°)</th>
+                                    <th>arctan (rad)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="inv-tan-tbody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── Calculadora de razones ─────────────────────────── -->
+        <section class="tab-section">
+            <h2 class="tab-title">Calculadora de Razones Trigonométricas</h2>
+            <p class="tab-hint">Ingresa un ángulo para obtener sus 6 razones trigonométricas.</p>
+
+            <div class="calc-row">
+                <input type="number" id="calc-angle" step="any" placeholder="Ángulo"
+                       inputmode="decimal" autocomplete="off" class="calc-input">
+                <div class="unit-toggle">
+                    <button class="unit-btn active" id="btn-deg" type="button">°</button>
+                    <button class="unit-btn" id="btn-rad" type="button">rad</button>
+                </div>
+                <button class="calc-btn" id="btn-calc" type="button">Calcular</button>
+            </div>
+            <div class="calc-error" id="calc-error" hidden></div>
+            <div id="calc-result" hidden>
+                <div class="calc-angle-display" id="calc-angle-display"></div>
+                <div class="ratio-grid" id="ratio-grid"></div>
+            </div>
+        </section>
+
+        <!-- ── Calculadora inversa ────────────────────────────── -->
+        <section class="tab-section">
+            <h2 class="tab-title">Calculadora de Funciones Inversas</h2>
+            <p class="tab-hint">Ingresa un valor para obtener arcsen, arccos y arctan.</p>
+
+            <div class="calc-row">
+                <input type="number" id="inv-val" step="any" placeholder="Valor (ej: 0.5)"
+                       inputmode="decimal" autocomplete="off" class="calc-input">
+                <div class="unit-toggle">
+                    <button class="unit-btn active" id="btn-inv-deg" type="button">°</button>
+                    <button class="unit-btn" id="btn-inv-rad" type="button">rad</button>
+                </div>
+                <button class="calc-btn" id="btn-inv-calc" type="button">Calcular</button>
+            </div>
+            <div class="calc-error" id="inv-error" hidden></div>
+            <div id="inv-result" hidden>
+                <div class="inv-card-grid" id="inv-card-grid"></div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="app-footer">
+        <small>Hecho con HTML5, CSS3 y JavaScript Vanilla — sin dependencias externas.</small>
+    </footer>
+
+    <script src="tabla.js"></script>
+</body>
+</html>

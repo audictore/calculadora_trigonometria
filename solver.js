@@ -191,15 +191,26 @@ const TriSolver = (function () {
 
     function detectType(sol) {
         const { a, b, c, A, B, C } = sol;
-        const ST = 1e-3, AT = 0.1;
+        const ST = 1e-3, AT = 0.5;
         const ab = Math.abs(a - b) < ST, ac = Math.abs(a - c) < ST, bc = Math.abs(b - c) < ST;
         const bySides = (ab && ac) ? 'Equilátero' : (ab || ac || bc) ? 'Isósceles' : 'Escaleno';
         const maxAng = Math.max(A, B, C);
-        const byAngles = Math.abs(maxAng - 90) < AT ? 'Rectángulo' : maxAng > 90 ? 'Obtusángulo' : 'Acutángulo';
+        let byAngles = Math.abs(maxAng - 90) < AT ? 'Rectángulo' : maxAng > 90 ? 'Obtusángulo' : 'Acutángulo';
+        // Respaldo: verificar teorema de Pitágoras para detectar triángulos rectángulos
+        // escalenos donde el ángulo calculado puede desviarse ligeramente de 90°
+        if (byAngles !== 'Rectángulo') {
+            const sorted = [a, b, c].slice().sort((x, y) => x - y);
+            if (Math.abs(sorted[0] ** 2 + sorted[1] ** 2 - sorted[2] ** 2) < sorted[2] ** 2 * 1e-4) {
+                byAngles = 'Rectángulo';
+            }
+        }
         let rightAngleVertex = null, hypotenuseSide = null;
         if (byAngles === 'Rectángulo') {
+            // Buscar el vértice más cercano a 90° (robusto ante errores de redondeo)
+            let minDiff = Infinity;
             for (const L of ['A', 'B', 'C']) {
-                if (Math.abs(sol[L] - 90) < AT) { rightAngleVertex = L; hypotenuseSide = L.toLowerCase(); break; }
+                const d = Math.abs(sol[L] - 90);
+                if (d < minDiff) { minDiff = d; rightAngleVertex = L; hypotenuseSide = L.toLowerCase(); }
             }
         }
         return { bySides, byAngles, rightAngleVertex, hypotenuseSide };

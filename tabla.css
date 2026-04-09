@@ -1,0 +1,400 @@
+/* tabla.css — Estilos de la página de tabla trigonométrica */
+
+/* ── Nav wrap (4 enlaces) ──────────────────────────────────────── */
+.app-nav { flex-wrap: wrap; }
+
+/* ── Layout principal ──────────────────────────────────────────── */
+.tabla-main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 1rem 1rem 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+}
+
+/* ── Sección ───────────────────────────────────────────────────── */
+.tab-section {
+    background: var(--bg-panel);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.tab-title {
+    margin: 0 0 0.35rem;
+    font-size: 1.1rem;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.tab-hint {
+    margin: 0 0 1.2rem;
+    color: var(--text-dim);
+    font-size: 0.88rem;
+    line-height: 1.5;
+}
+
+/* ── Scroll horizontal para tablas ─────────────────────────────── */
+.tab-scroll {
+    overflow-x: auto;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+}
+
+/* ── Tabla de ángulos especiales ────────────────────────────────── */
+.spec-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    min-width: 640px;
+}
+
+.spec-table th,
+.spec-table td {
+    border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+    text-align: center;
+    vertical-align: middle;
+    padding: 0;
+}
+
+.spec-table thead th {
+    background: rgba(56, 189, 248, 0.08);
+    padding: 0.55rem 0.75rem;
+    color: var(--text-dim);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+}
+
+/* Primera columna — grados */
+.spec-table .ang-cell {
+    padding: 0.6rem 1rem;
+    text-align: left;
+    background: rgba(56, 189, 248, 0.05);
+    color: var(--accent);
+    font-weight: 700;
+    white-space: nowrap;
+    border-right: 1px solid var(--border);
+}
+
+/* Segunda columna — radianes */
+.spec-table .rad-cell {
+    padding: 0.6rem 0.9rem;
+    color: var(--text-dim);
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    border-right: 1px solid rgba(148, 163, 184, 0.15);
+}
+
+/* Celda de valor exacto + decimal */
+.sc-cell {
+    padding: 0.45rem 0.7rem;
+}
+
+.sc-exact {
+    display: block;
+    font-weight: 700;
+    font-size: 0.92rem;
+    color: var(--text);
+    line-height: 1.3;
+}
+
+.sc-dec {
+    display: block;
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    font-variant-numeric: tabular-nums;
+    line-height: 1.4;
+}
+
+.sc-exact.sc-neg { color: var(--error); }
+.sc-exact.sc-inf { color: var(--text-dim); font-weight: 400; font-style: italic; }
+
+/* Fila del ángulo 90° */
+.row-90 td { background: rgba(56, 189, 248, 0.04); }
+.row-90 .ang-cell { color: var(--warning); }
+
+/* ── Tablas de funciones inversas ────────────────────────────────── */
+.inv-tables-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+@media (max-width: 760px) {
+    .inv-tables-wrap { grid-template-columns: 1fr; }
+}
+
+.inv-sub-title {
+    margin: 0 0 0.6rem;
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.inv-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+    min-width: 280px;
+}
+
+.inv-table th,
+.inv-table td {
+    padding: 0.42rem 0.65rem;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+    text-align: center;
+}
+
+.inv-table thead th {
+    background: rgba(99, 102, 241, 0.08);
+    color: var(--text-dim);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    border-bottom: 1px solid var(--border);
+}
+
+.inv-deg {
+    color: var(--success);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+.inv-deg.neg { color: var(--error); }
+
+.inv-rad {
+    color: var(--text-dim);
+    font-family: 'Courier New', monospace;
+    font-size: 0.8rem;
+}
+
+/* ── Calculadoras ────────────────────────────────────────────────── */
+.calc-row {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+}
+
+.calc-input {
+    flex: 1;
+    min-width: 120px;
+    max-width: 220px;
+    padding: 0.6rem 0.85rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-size: 1rem;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    -moz-appearance: textfield;
+}
+
+.calc-input::-webkit-outer-spin-button,
+.calc-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+
+.calc-input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+}
+
+/* Toggle °/rad */
+.unit-toggle {
+    display: flex;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.unit-btn {
+    padding: 0.6rem 0.9rem;
+    background: var(--bg-card);
+    border: none;
+    color: var(--text-dim);
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.12s;
+    font-family: inherit;
+}
+
+.unit-btn:first-child { border-right: 1px solid var(--border); }
+
+.unit-btn.active {
+    background: rgba(56, 189, 248, 0.2);
+    color: var(--accent);
+}
+
+/* Botón calcular */
+.calc-btn {
+    padding: 0.6rem 1.4rem;
+    background: linear-gradient(135deg, var(--accent-strong), #6366f1);
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-family: inherit;
+    box-shadow: 0 3px 10px rgba(14, 165, 233, 0.3);
+}
+
+.calc-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 16px rgba(14, 165, 233, 0.45);
+}
+
+.calc-error {
+    padding: 0.55rem 0.9rem;
+    background: rgba(248, 113, 113, 0.1);
+    border-left: 3px solid var(--error);
+    border-radius: 6px;
+    color: var(--error);
+    font-size: 0.88rem;
+    margin-bottom: 0.8rem;
+}
+
+/* Ángulo resultado display */
+.calc-angle-display {
+    padding: 0.55rem 0.9rem;
+    background: rgba(56, 189, 248, 0.08);
+    border-left: 3px solid var(--accent);
+    border-radius: 6px;
+    color: var(--accent);
+    font-size: 0.92rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    font-family: 'Courier New', monospace;
+}
+
+/* ── Grid de razones (6 cards) ──────────────────────────────────── */
+.ratio-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+}
+
+@media (max-width: 560px) {
+    .ratio-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+.ratio-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.9rem 1rem;
+    text-align: center;
+    transition: transform 0.12s;
+}
+
+.ratio-card:hover { transform: translateY(-2px); }
+
+.ratio-card.neg { border-color: rgba(248, 113, 113, 0.3); }
+.ratio-card.undef { border-color: rgba(148, 163, 184, 0.25); opacity: 0.7; }
+
+.rc-name {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.35rem;
+}
+
+.rc-val {
+    font-size: 1.3rem;
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+    color: var(--text);
+    margin-bottom: 0.3rem;
+}
+
+.ratio-card.neg .rc-val  { color: var(--error); }
+.ratio-card.undef .rc-val { color: var(--text-dim); }
+
+.rc-formula {
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    font-style: italic;
+}
+
+/* ── Grid de funciones inversas ──────────────────────────────────── */
+.inv-card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+}
+
+@media (max-width: 560px) {
+    .inv-card-grid { grid-template-columns: 1fr; }
+}
+
+.inv-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem;
+    text-align: center;
+}
+
+.inv-card-undef {
+    background: rgba(148, 163, 184, 0.05);
+    border-color: rgba(148, 163, 184, 0.2);
+    opacity: 0.65;
+}
+
+.ic-name {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.5rem;
+}
+
+.ic-val {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--success);
+    margin-bottom: 0.25rem;
+    font-variant-numeric: tabular-nums;
+}
+
+.ic-other {
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    font-family: 'Courier New', monospace;
+    margin-bottom: 0.4rem;
+}
+
+.ic-domain {
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    border-top: 1px dashed rgba(148, 163, 184, 0.2);
+    padding-top: 0.4rem;
+    margin-top: 0.2rem;
+}
+
+.ic-undef {
+    font-size: 1.1rem;
+    color: var(--text-dim);
+    font-style: italic;
+    margin-bottom: 0.3rem;
+}
+
+.ic-reason {
+    font-size: 0.8rem;
+    color: var(--error);
+    margin-bottom: 0.3rem;
+}

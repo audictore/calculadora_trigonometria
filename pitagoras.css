@@ -1,0 +1,121 @@
+/* pitagoras.css — Estilos exclusivos de la página del Teorema de Pitágoras */
+
+/* ── Diagrama de referencia ──────────────────────────────────────── */
+.pit-ref {
+    display: flex;
+    justify-content: center;
+    margin: 0.5rem 0 1.5rem;
+}
+
+.pit-ref svg {
+    width: 200px;
+    height: auto;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+}
+
+/* ── Grid de modos ───────────────────────────────────────────────── */
+.mode-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+@media (max-width: 560px) {
+    .mode-grid { grid-template-columns: 1fr; }
+}
+
+/* ── Tarjeta de modo ─────────────────────────────────────────────── */
+.mode-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 1.25rem 0.75rem;
+    background: var(--bg-card);
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.15s;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+.mode-card:hover {
+    border-color: var(--accent);
+    background: rgba(56, 189, 248, 0.06);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(56, 189, 248, 0.12);
+}
+
+.mode-card.active {
+    border-color: var(--accent);
+    background: rgba(56, 189, 248, 0.12);
+    box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+}
+
+.mode-icon {
+    font-size: 1.75rem;
+    line-height: 1;
+}
+
+.mode-title {
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--accent);
+    letter-spacing: 0.03em;
+}
+
+/* El lado incógnita tiene color diferente */
+.mode-title.find-hyp em {
+    color: #f472b6; /* rosa — hipotenusa */
+    font-style: italic;
+}
+
+.mode-title.find-cat em {
+    color: var(--success); /* verde — cateto */
+    font-style: italic;
+}
+
+.mode-desc {
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    line-height: 1.3;
+}
+
+.mode-formula {
+    font-size: 0.85rem;
+    color: var(--success);
+    font-family: 'Courier New', Consolas, monospace;
+    margin-top: 0.25rem;
+    background: rgba(74, 222, 128, 0.08);
+    padding: 0.2rem 0.6rem;
+    border-radius: 6px;
+    border: 1px solid rgba(74, 222, 128, 0.2);
+}
+
+/* ── Fórmula en el paso 2 ────────────────────────────────────────── */
+.pit-formula {
+    font-family: 'Courier New', Consolas, monospace;
+    font-size: 1rem;
+    color: var(--success);
+    background: rgba(74, 222, 128, 0.08);
+    padding: 0.25rem 0.75rem;
+    border-radius: 6px;
+    border: 1px solid rgba(74, 222, 128, 0.2);
+}
+
+/* ── SVG lados desconocidos (no se usan tras calcular, pero por si acaso) ── */
+.svg-side.unknown-side {
+    stroke: var(--warning);
+    stroke-dasharray: 8 4;
+    stroke-width: 2.5;
+}
+
+/* ── Nav con 4 elementos: permitir wrap en pantallas pequeñas ──────── */
+/* (Se agrega aquí en lugar de styles.css para no romper el nav en otras páginas) */
+.app-nav {
+    flex-wrap: wrap;
+    justify-content: center;
+}

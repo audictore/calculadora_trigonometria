@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teorema de Pitágoras — Calculadora Trigonométrica</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="formulario.css">
+    <link rel="stylesheet" href="pitagoras.css">
+</head>
+<body>
+    <nav class="app-nav">
+        <a href="index.html" class="nav-link">⚡ Calculadora en vivo</a>
+        <a href="formulario.html" class="nav-link">📋 Formulario guiado</a>
+        <a href="pitagoras.html" class="nav-link active">📐 Pitágoras</a>
+        <a href="tabla.html" class="nav-link">📊 Tabla trig.</a>
+    </nav>
+
+    <header class="app-header">
+        <h1>Teorema de Pitágoras</h1>
+        <p class="subtitle">Encuentra lados y ángulos de un triángulo rectángulo paso a paso</p>
+    </header>
+
+    <main class="form-main">
+
+        <!-- ── Paso 1: Selector de modo ─────────────────────── -->
+        <section class="form-section">
+            <div class="step-badge">Paso 1</div>
+            <h2>¿Qué quieres encontrar?</h2>
+            <p class="step-hint">Elige el lado desconocido del triángulo rectángulo.</p>
+
+            <!-- Diagrama de referencia -->
+            <div class="pit-ref">
+                <svg viewBox="0 0 220 170" xmlns="http://www.w3.org/2000/svg" aria-label="Triángulo rectángulo de referencia">
+                    <!-- Relleno -->
+                    <polygon points="30,140 170,140 30,30" fill="rgba(56,189,248,0.1)"/>
+                    <!-- Lados -->
+                    <line x1="30" y1="140" x2="170" y2="140" stroke="#38bdf8" stroke-width="2.5" stroke-linecap="round"/>
+                    <line x1="30" y1="30"  x2="30"  y2="140" stroke="#38bdf8" stroke-width="2.5" stroke-linecap="round"/>
+                    <line x1="30" y1="30"  x2="170" y2="140" stroke="#f472b6" stroke-width="3.5" stroke-linecap="round"/>
+                    <!-- Cuadrado ángulo recto -->
+                    <rect x="30" y="126" width="14" height="14" fill="rgba(251,191,36,0.15)" stroke="#fbbf24" stroke-width="1.5"/>
+                    <!-- Etiquetas de lados -->
+                    <text x="100" y="158" fill="#4ade80" font-size="14" font-weight="700" text-anchor="middle" font-family="inherit">a</text>
+                    <text x="14"  y="88"  fill="#4ade80" font-size="14" font-weight="700" text-anchor="middle" font-family="inherit">b</text>
+                    <text x="116" y="80"  fill="#f9a8d4" font-size="14" font-weight="700" text-anchor="middle" font-family="inherit">c</text>
+                    <!-- Etiquetas de vértices -->
+                    <text x="30"  y="22"  fill="#e2e8f0" font-size="13" font-weight="700" text-anchor="middle" font-family="inherit">A</text>
+                    <text x="185" y="145" fill="#e2e8f0" font-size="13" font-weight="700" text-anchor="middle" font-family="inherit">B</text>
+                    <text x="16"  y="148" fill="#e2e8f0" font-size="13" font-weight="700" text-anchor="middle" font-family="inherit">C</text>
+                    <!-- Arco ángulo A -->
+                    <path d="M 30 42 A 12 12 0 0 1 40 31" fill="none" stroke="#fbbf24" stroke-width="1.8"/>
+                    <text x="46" y="42" fill="#fbbf24" font-size="10" font-weight="600" font-family="inherit">α</text>
+                    <!-- Arco ángulo B -->
+                    <path d="M 157 140 A 14 14 0 0 1 170 130" fill="none" stroke="#fbbf24" stroke-width="1.8"/>
+                    <text x="148" y="129" fill="#fbbf24" font-size="10" font-weight="600" font-family="inherit">β</text>
+                    <!-- Fórmula -->
+                    <text x="110" y="18" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="'Courier New', monospace">c² = a² + b²</text>
+                </svg>
+            </div>
+
+            <div class="mode-grid">
+
+                <button class="mode-card" data-mode="hyp" type="button">
+                    <span class="mode-icon">📏</span>
+                    <span class="mode-title find-hyp">Hipotenusa <em>c</em></span>
+                    <span class="mode-desc">Conoces los catetos <strong>a</strong> y <strong>b</strong></span>
+                    <span class="mode-formula">c = √(a² + b²)</span>
+                </button>
+
+                <button class="mode-card" data-mode="cata" type="button">
+                    <span class="mode-icon">📐</span>
+                    <span class="mode-title find-cat">Cateto <em>a</em></span>
+                    <span class="mode-desc">Conoces <strong>c</strong> y <strong>b</strong></span>
+                    <span class="mode-formula">a = √(c² − b²)</span>
+                </button>
+
+                <button class="mode-card" data-mode="catb" type="button">
+                    <span class="mode-icon">📐</span>
+                    <span class="mode-title find-cat">Cateto <em>b</em></span>
+                    <span class="mode-desc">Conoces <strong>c</strong> y <strong>a</strong></span>
+                    <span class="mode-formula">b = √(c² − a²)</span>
+                </button>
+
+            </div>
+        </section>
+
+        <!-- ── Paso 2: Ingreso de datos ──────────────────────── -->
+        <section class="form-section" id="step2" hidden>
+            <div class="step-badge">Paso 2</div>
+            <h2>Ingresa los datos conocidos</h2>
+            <p class="step-hint">
+                Fórmula: <code id="mode-formula" class="pit-formula"></code>
+            </p>
+
+            <div class="dyn-fields" id="dyn-fields"></div>
+
+            <button type="button" class="solve-btn" id="btn-solve" disabled>Calcular</button>
+        </section>
+
+        <!-- ── Resultados ─────────────────────────────────────── -->
+        <section class="form-section result-section" id="result-section" hidden>
+            <div class="step-badge success">Resultado</div>
+            <h2>Triángulo resuelto</h2>
+
+            <!-- Tipo + diagrama -->
+            <div class="result-top">
+                <div class="type-badges">
+                    <span class="type-badge angles">Rectángulo</span>
+                    <span class="type-badge sides" id="rp-type-sides">Escaleno</span>
+                    <div class="hyp-info" style="margin-top:0.5rem;">
+                        <strong>Hipotenusa:</strong> lado <strong>c</strong><br>
+                        <strong>Ángulo recto:</strong> vértice <strong>C = 90°</strong>
+                    </div>
+                </div>
+                <div class="result-diagram">
+                    <svg id="pit-svg" viewBox="0 0 380 280" xmlns="http://www.w3.org/2000/svg"></svg>
+                </div>
+            </div>
+
+            <!-- Grid de valores -->
+            <div class="value-grid">
+                <div class="value-group">
+                    <h3>Lados</h3>
+                    <div class="value-row" id="row-a"><span class="vr-label">a (cateto)</span><span class="vr-val rp-val" id="rp-a">—</span></div>
+                    <div class="value-row" id="row-b"><span class="vr-label">b (cateto)</span><span class="vr-val rp-val" id="rp-b">—</span></div>
+                    <div class="value-row is-hyp"><span class="vr-label">c</span><span class="vr-val hyp" id="rp-c">—</span></div>
+                </div>
+                <div class="value-group">
+                    <h3>Ángulos</h3>
+                    <div class="value-row"><span class="vr-label">A</span><span class="vr-val computed" id="rp-A">—</span></div>
+                    <div class="value-row"><span class="vr-label">B</span><span class="vr-val computed" id="rp-B">—</span></div>
+                    <div class="value-row"><span class="vr-label">C (recto)</span><span class="vr-val" style="color:var(--warning)">90°</span></div>
+                </div>
+                <div class="value-group">
+                    <h3>Medidas</h3>
+                    <div class="value-row"><span class="vr-label">Área</span><span class="vr-val" id="rp-area">—</span></div>
+                    <div class="value-row"><span class="vr-label">Perímetro</span><span class="vr-val" id="rp-per">—</span></div>
+                    <div class="value-row"><span class="vr-label">Semiperímetro</span><span class="vr-val" id="rp-semi">—</span></div>
+                    <div class="value-row"><span class="vr-label">Inradio (r)</span><span class="vr-val" id="rp-inr">—</span></div>
+                    <div class="value-row"><span class="vr-label">Circunradio (R)</span><span class="vr-val" id="rp-cir">—</span></div>
+                </div>
+                <div class="value-group">
+                    <h3>Alturas</h3>
+                    <div class="value-row"><span class="vr-label">h<sub>a</sub></span><span class="vr-val" id="rp-ha">—</span></div>
+                    <div class="value-row"><span class="vr-label">h<sub>b</sub></span><span class="vr-val" id="rp-hb">—</span></div>
+                    <div class="value-row"><span class="vr-label">h<sub>c</sub></span><span class="vr-val" id="rp-hc">—</span></div>
+                </div>
+            </div>
+
+            <!-- Acordeón de desarrollo -->
+            <div class="dev-section" id="dev-section">
+                <button class="dev-toggle" id="dev-toggle" type="button">
+                    <span>📐 Ver desarrollo paso a paso</span>
+                    <span class="dev-arrow" id="dev-arrow">▼</span>
+                </button>
+                <div class="dev-body" id="dev-body" hidden></div>
+            </div>
+
+            <!-- Tabla trigonométrica -->
+            <div class="trig-section">
+                <h3>Razones Trigonométricas</h3>
+                <div class="trig-table-wrapper">
+                    <table class="trig-table">
+                        <thead>
+                            <tr>
+                                <th>Ángulo</th>
+                                <th>Valor</th>
+                                <th>sen</th>
+                                <th>cos</th>
+                                <th>tan</th>
+                                <th>cot</th>
+                                <th>sec</th>
+                                <th>csc</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>A</th>
+                                <td id="tp-A-val">—</td>
+                                <td id="tp-A-sen">—</td>
+                                <td id="tp-A-cos">—</td>
+                                <td id="tp-A-tan">—</td>
+                                <td id="tp-A-cot">—</td>
+                                <td id="tp-A-sec">—</td>
+                                <td id="tp-A-csc">—</td>
+                            </tr>
+                            <tr>
+                                <th>B</th>
+                                <td id="tp-B-val">—</td>
+                                <td id="tp-B-sen">—</td>
+                                <td id="tp-B-cos">—</td>
+                                <td id="tp-B-tan">—</td>
+                                <td id="tp-B-cot">—</td>
+                                <td id="tp-B-sec">—</td>
+                                <td id="tp-B-csc">—</td>
+                            </tr>
+                            <tr>
+                                <th>C</th>
+                                <td>90°</td>
+                                <td>1</td>
+                                <td>0</td>
+                                <td>∞</td>
+                                <td>0</td>
+                                <td>∞</td>
+                                <td>1</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="button" id="btn-reset" class="reset-btn">← Nuevo cálculo</button>
+            </div>
+        </section>
+
+        <!-- Error -->
+        <div class="error-box" id="error-box" hidden></div>
+
+    </main>
+
+    <footer class="app-footer">
+        <small>Hecho con HTML5, CSS3 y JavaScript Vanilla — sin dependencias externas.</small>
+    </footer>
+
+    <script src="pitagoras.js"></script>
+</body>
+</html>
