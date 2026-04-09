@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Trigonométrica Interactiva</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="app-nav">
+        <a href="index.html" class="nav-link active">⚡ Calculadora en vivo</a>
+        <a href="formulario.html" class="nav-link">📋 Formulario guiado</a>
+    </nav>
+
+    <header class="app-header">
+        <h1>Calculadora Trigonométrica Interactiva</h1>
+        <p class="subtitle">Resuelve cualquier triángulo en tiempo real</p>
+    </header>
+
+    <main class="app-main">
+        <!-- Panel de entrada -->
+        <section class="panel input-panel" aria-labelledby="input-title">
+            <h2 id="input-title">Datos de Entrada</h2>
+
+            <div class="input-grid">
+                <fieldset class="input-group">
+                    <legend>Lados</legend>
+                    <label>
+                        <span>Lado <em>a</em></span>
+                        <input type="number" id="side-a" step="any" min="0" placeholder="—" inputmode="decimal">
+                    </label>
+                    <label>
+                        <span>Lado <em>b</em></span>
+                        <input type="number" id="side-b" step="any" min="0" placeholder="—" inputmode="decimal">
+                    </label>
+                    <label>
+                        <span>Lado <em>c</em></span>
+                        <input type="number" id="side-c" step="any" min="0" placeholder="—" inputmode="decimal">
+                    </label>
+                </fieldset>
+
+                <fieldset class="input-group">
+                    <legend>Ángulos (°)</legend>
+                    <label>
+                        <span>Ángulo <em>A</em></span>
+                        <input type="number" id="angle-A" step="any" min="0" max="180" placeholder="—" inputmode="decimal">
+                    </label>
+                    <label>
+                        <span>Ángulo <em>B</em></span>
+                        <input type="number" id="angle-B" step="any" min="0" max="180" placeholder="—" inputmode="decimal">
+                    </label>
+                    <label>
+                        <span>Ángulo <em>C</em></span>
+                        <input type="number" id="angle-C" step="any" min="0" max="180" placeholder="—" inputmode="decimal">
+                    </label>
+                </fieldset>
+            </div>
+
+            <div class="actions type-presets">
+                <span class="actions-label">Preset:</span>
+                <button type="button" id="btn-type-right" title="Fija C = 90° (triángulo rectángulo)">Rectángulo</button>
+                <button type="button" id="btn-type-equi" title="Fija A = B = C = 60° (triángulo equilátero)">Equilátero</button>
+                <button type="button" id="btn-type-iso45" title="Fija A = B = 45°, C = 90°">Rect. isósceles</button>
+            </div>
+
+            <div class="actions">
+                <button type="button" id="btn-clear">Limpiar</button>
+            </div>
+
+            <div class="actions example-presets">
+                <span class="actions-label">Ejemplos:</span>
+                <button type="button" id="btn-example" title="Triángulo rectángulo con catetos 3 y 4">Rectángulo 3-4-5</button>
+                <button type="button" id="btn-example-equi" title="Triángulo equilátero con lado 6">Equilátero</button>
+                <button type="button" id="btn-example-iso" title="Triángulo isósceles con a = b = 5, c = 6">Isósceles</button>
+            </div>
+
+            <div class="status-message" id="status-message" role="status" aria-live="polite">
+                Ingresa al menos 3 datos para resolver el triángulo.
+            </div>
+        </section>
+
+        <!-- Diagrama -->
+        <section class="panel diagram-panel" aria-labelledby="diagram-title">
+            <h2 id="diagram-title">Diagrama</h2>
+            <div class="svg-container">
+                <svg id="triangle-svg" viewBox="0 0 400 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagrama del triángulo">
+                    <g id="svg-triangle"></g>
+                </svg>
+            </div>
+        </section>
+
+        <!-- Resultados -->
+        <section class="panel results-panel" aria-labelledby="results-title">
+            <h2 id="results-title">Resultados</h2>
+
+            <div class="results-grid">
+                <div class="result-card">
+                    <h3>Tipo de triángulo</h3>
+                    <ul class="result-list">
+                        <li><span class="label">Por lados</span><span class="value" id="r-type-sides">—</span></li>
+                        <li><span class="label">Por ángulos</span><span class="value" id="r-type-angles">—</span></li>
+                    </ul>
+                    <div class="right-info" id="r-right-info" hidden></div>
+                </div>
+
+                <div class="result-card">
+                    <h3>Lados</h3>
+                    <ul class="result-list">
+                        <li><span class="label">a</span><span class="value" id="r-side-a">—</span></li>
+                        <li><span class="label">b</span><span class="value" id="r-side-b">—</span></li>
+                        <li><span class="label">c</span><span class="value" id="r-side-c">—</span></li>
+                    </ul>
+                </div>
+
+                <div class="result-card">
+                    <h3>Ángulos</h3>
+                    <ul class="result-list">
+                        <li><span class="label">A</span><span class="value" id="r-angle-A">—</span></li>
+                        <li><span class="label">B</span><span class="value" id="r-angle-B">—</span></li>
+                        <li><span class="label">C</span><span class="value" id="r-angle-C">—</span></li>
+                    </ul>
+                </div>
+
+                <div class="result-card">
+                    <h3>Medidas</h3>
+                    <ul class="result-list">
+                        <li><span class="label">Perímetro</span><span class="value" id="r-perimeter">—</span></li>
+                        <li><span class="label">Semi-perímetro</span><span class="value" id="r-semi">—</span></li>
+                        <li><span class="label">Área</span><span class="value" id="r-area">—</span></li>
+                        <li><span class="label">Inradio (r)</span><span class="value" id="r-inradius">—</span></li>
+                        <li><span class="label">Circunradio (R)</span><span class="value" id="r-circumradius">—</span></li>
+                    </ul>
+                </div>
+
+                <div class="result-card">
+                    <h3>Alturas</h3>
+                    <ul class="result-list">
+                        <li><span class="label">h<sub>a</sub></span><span class="value" id="r-h-a">—</span></li>
+                        <li><span class="label">h<sub>b</sub></span><span class="value" id="r-h-b">—</span></li>
+                        <li><span class="label">h<sub>c</sub></span><span class="value" id="r-h-c">—</span></li>
+                    </ul>
+                </div>
+
+                <div class="result-card wide">
+                    <h3>Razones Trigonométricas</h3>
+                    <div class="trig-table-wrapper">
+                        <table class="trig-table">
+                            <thead>
+                                <tr>
+                                    <th>Ángulo</th>
+                                    <th>sen</th>
+                                    <th>cos</th>
+                                    <th>tan</th>
+                                    <th>cot</th>
+                                    <th>sec</th>
+                                    <th>csc</th>
+                                </tr>
+                            </thead>
+                            <tbody id="trig-tbody">
+                                <tr>
+                                    <th>A</th>
+                                    <td id="t-A-sen">—</td>
+                                    <td id="t-A-cos">—</td>
+                                    <td id="t-A-tan">—</td>
+                                    <td id="t-A-cot">—</td>
+                                    <td id="t-A-sec">—</td>
+                                    <td id="t-A-csc">—</td>
+                                </tr>
+                                <tr>
+                                    <th>B</th>
+                                    <td id="t-B-sen">—</td>
+                                    <td id="t-B-cos">—</td>
+                                    <td id="t-B-tan">—</td>
+                                    <td id="t-B-cot">—</td>
+                                    <td id="t-B-sec">—</td>
+                                    <td id="t-B-csc">—</td>
+                                </tr>
+                                <tr>
+                                    <th>C</th>
+                                    <td id="t-C-sen">—</td>
+                                    <td id="t-C-cos">—</td>
+                                    <td id="t-C-tan">—</td>
+                                    <td id="t-C-cot">—</td>
+                                    <td id="t-C-sec">—</td>
+                                    <td id="t-C-csc">—</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="app-footer">
+        <small>Hecho con HTML5, CSS3 y JavaScript Vanilla — sin dependencias externas.</small>
+    </footer>
+
+    <script src="solver.js"></script>
+    <script src="calculator.js"></script>
+</body>
+</html>

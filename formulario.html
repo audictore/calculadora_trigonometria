@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario — Calculadora Trigonométrica</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="formulario.css">
+</head>
+<body>
+    <nav class="app-nav">
+        <a href="index.html" class="nav-link">⚡ Calculadora en vivo</a>
+        <a href="formulario.html" class="nav-link active">📋 Formulario guiado</a>
+    </nav>
+
+    <header class="app-header">
+        <h1>Formulario de Resolución</h1>
+        <p class="subtitle">Elige el caso, ingresa los datos y obtén todos los resultados</p>
+    </header>
+
+    <main class="form-main">
+
+        <!-- ── Paso 1: Selector de caso ─────────────────── -->
+        <section class="form-section">
+            <div class="step-badge">Paso 1</div>
+            <h2>¿Qué datos conoces?</h2>
+            <p class="step-hint">Selecciona la combinación de datos que tienes disponibles.</p>
+
+            <div class="case-grid">
+
+                <label class="case-card" data-case="SSS">
+                    <input type="radio" name="caso" value="SSS">
+                    <div class="case-icon">
+                        <svg viewBox="0 0 80 60" class="mini-tri">
+                            <polygon points="10,50 70,50 40,10" class="mt-fill"/>
+                            <line x1="10" y1="50" x2="70" y2="50" class="mt-known"/>
+                            <line x1="10" y1="50" x2="40" y2="10" class="mt-known"/>
+                            <line x1="70" y1="50" x2="40" y2="10" class="mt-known"/>
+                            <text x="40" y="57" class="mt-lbl">a</text>
+                            <text x="20" y="28" class="mt-lbl">b</text>
+                            <text x="60" y="28" class="mt-lbl">c</text>
+                        </svg>
+                    </div>
+                    <div class="case-title">SSS</div>
+                    <div class="case-desc">Los <strong>3 lados</strong></div>
+                    <div class="case-law">→ Ley de Cosenos</div>
+                </label>
+
+                <label class="case-card" data-case="SAS">
+                    <input type="radio" name="caso" value="SAS">
+                    <div class="case-icon">
+                        <svg viewBox="0 0 80 60" class="mini-tri">
+                            <polygon points="10,50 70,50 40,10" class="mt-fill"/>
+                            <line x1="10" y1="50" x2="70" y2="50" class="mt-known"/>
+                            <line x1="10" y1="50" x2="40" y2="10" class="mt-known"/>
+                            <line x1="70" y1="50" x2="40" y2="10" class="mt-unknown"/>
+                            <text x="40" y="57" class="mt-lbl">a</text>
+                            <text x="20" y="28" class="mt-lbl">b</text>
+                            <text x="18" y="50" class="mt-lbl-ang">C</text>
+                        </svg>
+                    </div>
+                    <div class="case-title">SAS</div>
+                    <div class="case-desc"><strong>2 lados</strong> + ángulo entre ellos</div>
+                    <div class="case-law">→ Ley de Cosenos</div>
+                </label>
+
+                <label class="case-card" data-case="ASA">
+                    <input type="radio" name="caso" value="ASA">
+                    <div class="case-icon">
+                        <svg viewBox="0 0 80 60" class="mini-tri">
+                            <polygon points="10,50 70,50 40,10" class="mt-fill"/>
+                            <line x1="10" y1="50" x2="70" y2="50" class="mt-known"/>
+                            <line x1="10" y1="50" x2="40" y2="10" class="mt-unknown"/>
+                            <line x1="70" y1="50" x2="40" y2="10" class="mt-unknown"/>
+                            <text x="40" y="57" class="mt-lbl">a</text>
+                            <text x="18" y="50" class="mt-lbl-ang">B</text>
+                            <text x="60" y="50" class="mt-lbl-ang">C</text>
+                        </svg>
+                    </div>
+                    <div class="case-title">ASA / AAS</div>
+                    <div class="case-desc"><strong>1 lado</strong> + <strong>2 ángulos</strong></div>
+                    <div class="case-law">→ Ley de Senos</div>
+                </label>
+
+                <label class="case-card" data-case="SSA">
+                    <input type="radio" name="caso" value="SSA">
+                    <div class="case-icon">
+                        <svg viewBox="0 0 80 60" class="mini-tri">
+                            <polygon points="10,50 70,50 40,10" class="mt-fill"/>
+                            <line x1="10" y1="50" x2="70" y2="50" class="mt-known"/>
+                            <line x1="10" y1="50" x2="40" y2="10" class="mt-known"/>
+                            <line x1="70" y1="50" x2="40" y2="10" class="mt-unknown"/>
+                            <text x="40" y="57" class="mt-lbl">a</text>
+                            <text x="20" y="28" class="mt-lbl">b</text>
+                            <text x="60" y="50" class="mt-lbl-ang">C</text>
+                        </svg>
+                    </div>
+                    <div class="case-title">SSA</div>
+                    <div class="case-desc"><strong>2 lados</strong> + ángulo opuesto</div>
+                    <div class="case-law">⚠ Puede ser ambiguo</div>
+                </label>
+
+            </div>
+        </section>
+
+        <!-- ── Paso 2: Campos dinámicos ─────────────────── -->
+        <section class="form-section" id="step2" hidden>
+            <div class="step-badge">Paso 2</div>
+            <h2>Ingresa los datos conocidos</h2>
+            <p class="step-hint" id="step2-hint"></p>
+
+            <div class="dyn-fields" id="dyn-fields"></div>
+
+            <button type="button" class="solve-btn" id="btn-solve">Calcular triángulo</button>
+        </section>
+
+        <!-- ── Resultados ────────────────────────────────── -->
+        <section class="form-section result-section" id="result-section" hidden>
+            <div class="step-badge success">Resultado</div>
+            <h2>Triángulo resuelto</h2>
+
+            <!-- Alerta / aviso -->
+            <div class="result-alert" id="result-alert" hidden></div>
+
+            <!-- Tipo + diagrama -->
+            <div class="result-top">
+                <div class="type-badges" id="type-badges"></div>
+                <div class="result-diagram">
+                    <svg id="form-svg" viewBox="0 0 380 280" xmlns="http://www.w3.org/2000/svg"></svg>
+                </div>
+            </div>
+
+            <!-- Grid de valores -->
+            <div class="value-grid">
+                <div class="value-group">
+                    <h3>Lados</h3>
+                    <div class="value-row"><span class="vr-label">a</span><span class="vr-val" id="fr-a">—</span></div>
+                    <div class="value-row"><span class="vr-label">b</span><span class="vr-val" id="fr-b">—</span></div>
+                    <div class="value-row"><span class="vr-label">c</span><span class="vr-val" id="fr-c">—</span></div>
+                </div>
+                <div class="value-group">
+                    <h3>Ángulos</h3>
+                    <div class="value-row"><span class="vr-label">A</span><span class="vr-val" id="fr-A">—</span></div>
+                    <div class="value-row"><span class="vr-label">B</span><span class="vr-val" id="fr-B">—</span></div>
+                    <div class="value-row"><span class="vr-label">C</span><span class="vr-val" id="fr-C">—</span></div>
+                </div>
+                <div class="value-group">
+                    <h3>Medidas</h3>
+                    <div class="value-row"><span class="vr-label">Perímetro</span><span class="vr-val" id="fr-per">—</span></div>
+                    <div class="value-row"><span class="vr-label">Semiperímetro</span><span class="vr-val" id="fr-semi">—</span></div>
+                    <div class="value-row"><span class="vr-label">Área</span><span class="vr-val" id="fr-area">—</span></div>
+                    <div class="value-row"><span class="vr-label">Inradio (r)</span><span class="vr-val" id="fr-inr">—</span></div>
+                    <div class="value-row"><span class="vr-label">Circunradio (R)</span><span class="vr-val" id="fr-cir">—</span></div>
+                </div>
+                <div class="value-group">
+                    <h3>Alturas</h3>
+                    <div class="value-row"><span class="vr-label">h<sub>a</sub></span><span class="vr-val" id="fr-ha">—</span></div>
+                    <div class="value-row"><span class="vr-label">h<sub>b</sub></span><span class="vr-val" id="fr-hb">—</span></div>
+                    <div class="value-row"><span class="vr-label">h<sub>c</sub></span><span class="vr-val" id="fr-hc">—</span></div>
+                </div>
+            </div>
+
+            <!-- Info hipotenusa (si rectángulo) -->
+            <div class="hyp-info" id="fr-hyp-info" hidden></div>
+
+            <!-- ── DESARROLLO / PROCEDIMIENTO ──────────────── -->
+            <div class="dev-section" id="dev-section">
+                <button class="dev-toggle" id="dev-toggle" type="button">
+                    <span>📐 Ver desarrollo paso a paso</span>
+                    <span class="dev-arrow" id="dev-arrow">▼</span>
+                </button>
+                <div class="dev-body" id="dev-body" hidden></div>
+            </div>
+
+            <!-- Método (badge pequeño debajo del desarrollo) -->
+            <div class="method-box" id="method-box"></div>
+
+            <!-- Tabla trigonométrica -->
+            <div class="trig-section">
+                <h3>Razones Trigonométricas</h3>
+                <div class="trig-table-wrapper">
+                    <table class="trig-table">
+                        <thead>
+                            <tr>
+                                <th>Ángulo</th>
+                                <th>Valor</th>
+                                <th>sen</th>
+                                <th>cos</th>
+                                <th>tan</th>
+                                <th>cot</th>
+                                <th>sec</th>
+                                <th>csc</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>A</th>
+                                <td id="ff-A-val">—</td>
+                                <td id="ff-A-sen">—</td>
+                                <td id="ff-A-cos">—</td>
+                                <td id="ff-A-tan">—</td>
+                                <td id="ff-A-cot">—</td>
+                                <td id="ff-A-sec">—</td>
+                                <td id="ff-A-csc">—</td>
+                            </tr>
+                            <tr>
+                                <th>B</th>
+                                <td id="ff-B-val">—</td>
+                                <td id="ff-B-sen">—</td>
+                                <td id="ff-B-cos">—</td>
+                                <td id="ff-B-tan">—</td>
+                                <td id="ff-B-cot">—</td>
+                                <td id="ff-B-sec">—</td>
+                                <td id="ff-B-csc">—</td>
+                            </tr>
+                            <tr>
+                                <th>C</th>
+                                <td id="ff-C-val">—</td>
+                                <td id="ff-C-sen">—</td>
+                                <td id="ff-C-cos">—</td>
+                                <td id="ff-C-tan">—</td>
+                                <td id="ff-C-cot">—</td>
+                                <td id="ff-C-sec">—</td>
+                                <td id="ff-C-csc">—</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="button" id="btn-reset" class="reset-btn">← Nuevo cálculo</button>
+            </div>
+        </section>
+
+        <!-- ── Error ─────────────────────────────────────── -->
+        <div class="error-box" id="error-box" hidden></div>
+
+    </main>
+
+    <footer class="app-footer">
+        <small>Hecho con HTML5, CSS3 y JavaScript Vanilla — sin dependencias externas.</small>
+    </footer>
+
+    <script src="solver.js"></script>
+    <script src="formulario.js"></script>
+</body>
+</html>

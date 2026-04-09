@@ -1,0 +1,607 @@
+/* formulario.css — Estilos exclusivos de la página de formulario */
+
+/* ── Acordeón de desarrollo ─────────────────────────────────────── */
+.dev-section {
+    margin-bottom: 1.2rem;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.dev-toggle {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.85rem 1.1rem;
+    background: rgba(99, 102, 241, 0.1);
+    border: none;
+    color: #a5b4fc;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: left;
+    gap: 0.5rem;
+    transition: background 0.15s;
+}
+
+.dev-toggle:hover { background: rgba(99, 102, 241, 0.18); }
+.dev-toggle.open { background: rgba(99, 102, 241, 0.2); }
+.dev-arrow { font-size: 0.75rem; transition: transform 0.2s; }
+
+.dev-body {
+    padding: 1.2rem;
+    background: var(--bg-card);
+    border-top: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Grupo (sección dentro del desarrollo) */
+.dev-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.dev-group-title {
+    font-size: 0.85rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--text-dim);
+    border-bottom: 1px dashed var(--border);
+    padding-bottom: 0.4rem;
+}
+
+/* Paso individual */
+.dev-step {
+    background: var(--bg-panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.dev-step-title {
+    background: rgba(56, 189, 248, 0.08);
+    border-bottom: 1px solid var(--border);
+    padding: 0.45rem 0.9rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.02em;
+}
+
+.dev-formula-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.dev-formula {
+    padding: 0.5rem 0.9rem;
+    font-size: 0.88rem;
+    font-family: 'Courier New', 'Consolas', monospace;
+    line-height: 1.65;
+    border-bottom: 1px dashed rgba(148, 163, 184, 0.12);
+}
+
+.dev-formula:last-child { border-bottom: none; }
+
+/* Tipos de fórmula */
+.dev-formula.symbolic {
+    color: var(--text-dim);
+    background: rgba(255, 255, 255, 0.02);
+    font-style: italic;
+}
+
+.dev-formula.subst {
+    color: var(--text);
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.dev-formula.result {
+    color: var(--success);
+    font-weight: 700;
+    background: rgba(74, 222, 128, 0.06);
+    font-size: 0.92rem;
+}
+
+.dev-formula strong { color: #86efac; }
+
+.dev-note {
+    padding: 0.35rem 0.9rem 0.5rem;
+    font-size: 0.78rem;
+    color: var(--warning);
+    background: rgba(251, 191, 36, 0.05);
+    border-top: 1px dashed rgba(251, 191, 36, 0.2);
+}
+
+/* Bloque de razones trigonométricas */
+.dev-trig-angle {
+    background: var(--bg-panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.dev-trig-label {
+    background: rgba(251, 191, 36, 0.08);
+    border-bottom: 1px solid var(--border);
+    padding: 0.45rem 0.9rem;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--warning);
+}
+
+.dev-trig-grid {
+    display: flex;
+    flex-direction: column;
+}
+
+.dtg-row {
+    display: grid;
+    grid-template-columns: 100px 1fr auto;
+    gap: 0.5rem;
+    align-items: center;
+    padding: 0.35rem 0.9rem;
+    border-bottom: 1px dashed rgba(148, 163, 184, 0.1);
+    font-size: 0.85rem;
+}
+
+.dtg-row:last-child { border-bottom: none; }
+
+.dtg-name {
+    color: var(--accent);
+    font-weight: 700;
+    font-family: 'Courier New', monospace;
+    white-space: nowrap;
+}
+
+.dtg-sym {
+    color: var(--text-dim);
+    font-family: 'Courier New', monospace;
+    font-size: 0.82rem;
+}
+
+.dtg-val {
+    color: var(--success);
+    font-family: 'Courier New', monospace;
+    font-weight: 700;
+    text-align: right;
+    white-space: nowrap;
+}
+
+.dtg-val strong { color: #86efac; }
+
+@media (max-width: 560px) {
+    .dtg-row { grid-template-columns: 80px 1fr auto; }
+    .dev-formula { font-size: 0.8rem; }
+}
+
+.form-main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 1rem 1rem 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Secciones / pasos */
+.form-section {
+    background: var(--bg-panel);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+}
+
+.form-section h2 {
+    margin: 0.5rem 0 0.4rem;
+    font-size: 1.2rem;
+    color: var(--text);
+}
+
+.step-hint {
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    margin: 0 0 1.2rem;
+}
+
+.step-badge {
+    display: inline-block;
+    padding: 0.2rem 0.75rem;
+    border-radius: 999px;
+    background: rgba(56, 189, 248, 0.15);
+    border: 1px solid rgba(56, 189, 248, 0.4);
+    color: var(--accent);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.6rem;
+}
+
+.step-badge.success {
+    background: rgba(74, 222, 128, 0.15);
+    border-color: rgba(74, 222, 128, 0.4);
+    color: var(--success);
+}
+
+/* ── Tarjetas de caso ──────────────────────────────────── */
+.case-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 1rem;
+}
+
+.case-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 1rem 0.75rem;
+    background: var(--bg-card);
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.15s;
+    text-align: center;
+    user-select: none;
+}
+
+.case-card input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.case-card:hover {
+    border-color: var(--accent);
+    background: rgba(56, 189, 248, 0.06);
+    transform: translateY(-2px);
+}
+
+.case-card:has(input:checked) {
+    border-color: var(--accent);
+    background: rgba(56, 189, 248, 0.12);
+    box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+}
+
+.case-title {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+}
+
+.case-desc {
+    font-size: 0.85rem;
+    color: var(--text);
+    line-height: 1.3;
+}
+
+.case-law {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    font-style: italic;
+    margin-top: 0.2rem;
+}
+
+/* Mini SVG triángulo */
+.case-icon { width: 72px; height: 54px; }
+.mini-tri { width: 100%; height: 100%; }
+.mt-fill { fill: rgba(56, 189, 248, 0.1); }
+.mt-known { stroke: var(--accent); stroke-width: 3; }
+.mt-unknown { stroke: var(--border); stroke-width: 2; stroke-dasharray: 5 3; }
+.mt-lbl { fill: var(--success); font-size: 11px; font-weight: 700; text-anchor: middle; font-family: inherit; }
+.mt-lbl-ang { fill: var(--warning); font-size: 10px; font-weight: 700; text-anchor: middle; font-family: inherit; }
+
+/* ── Campos dinámicos ──────────────────────────────────── */
+.dyn-fields {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.field-group {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.9rem 1rem;
+}
+
+.field-group legend, .field-group .fg-title {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-dim);
+    margin-bottom: 0.6rem;
+}
+
+/* Wrapper campo + error inline */
+.field-item {
+    margin: 0.45rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.field-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+}
+
+.field-row label-text, .field-row .fl-label {
+    font-size: 0.92rem;
+    color: var(--text);
+}
+
+.fl-label em { color: var(--accent); font-weight: 700; font-style: italic; }
+.fl-label .ang-em { color: var(--warning); font-weight: 700; font-style: italic; }
+
+/* Error inline por campo */
+.field-error {
+    font-size: 0.75rem;
+    color: var(--error);
+    padding-left: 0.2rem;
+    min-height: 0;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.2s ease, opacity 0.2s ease;
+}
+
+.field-error.show {
+    max-height: 2.5rem;
+    opacity: 1;
+}
+
+.field-row input {
+    width: 110px;
+    padding: 0.45rem 0.6rem;
+    background: var(--bg-panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-size: 0.95rem;
+    text-align: right;
+    -moz-appearance: textfield;
+    transition: border-color 0.15s, box-shadow 0.15s;
+}
+.field-row input::-webkit-outer-spin-button,
+.field-row input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.field-row input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+}
+.field-row input.invalid {
+    border-color: var(--error);
+    box-shadow: 0 0 0 3px rgba(248, 113, 113, 0.15);
+    background: rgba(248, 113, 113, 0.06);
+}
+.field-row input.valid {
+    border-color: var(--success);
+    box-shadow: 0 0 0 2px rgba(74, 222, 128, 0.15);
+}
+
+/* ── Botón principal ───────────────────────────────────── */
+.solve-btn {
+    width: 100%;
+    padding: 0.85rem 1.5rem;
+    background: linear-gradient(135deg, var(--accent-strong), #6366f1);
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 1.05rem;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 0.03em;
+    transition: all 0.15s;
+    box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3);
+}
+
+.solve-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(14, 165, 233, 0.45);
+}
+
+.solve-btn:active { transform: translateY(0); }
+
+/* ── Resultados ────────────────────────────────────────── */
+.result-alert {
+    padding: 0.7rem 1rem;
+    border-radius: 8px;
+    background: rgba(251, 191, 36, 0.12);
+    border-left: 3px solid var(--warning);
+    color: var(--text);
+    font-size: 0.9rem;
+    margin-bottom: 1.2rem;
+}
+
+.result-top {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+}
+
+.type-badges {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    min-width: 160px;
+}
+
+.type-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.9rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    border: 1px solid;
+}
+
+.type-badge.sides { background: rgba(56,189,248,0.12); border-color: rgba(56,189,248,0.4); color: var(--accent); }
+.type-badge.angles { background: rgba(74,222,128,0.12); border-color: rgba(74,222,128,0.4); color: var(--success); }
+.type-badge.method { background: rgba(148,163,184,0.1); border-color: var(--border); color: var(--text-dim); font-weight: 500; font-style: italic; }
+
+.result-diagram {
+    flex: 1;
+    min-width: 220px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.5rem;
+}
+
+#form-svg {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Grid de valores */
+.value-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.2rem;
+}
+
+.value-group {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.9rem 1rem;
+}
+
+.value-group h3 {
+    margin: 0 0 0.6rem;
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.value-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 0.28rem 0;
+    border-bottom: 1px dashed rgba(148,163,184,0.15);
+    font-size: 0.9rem;
+}
+
+.value-row:last-child { border-bottom: none; }
+
+.vr-label { color: var(--text-dim); }
+.vr-val { font-weight: 700; font-variant-numeric: tabular-nums; color: var(--text); }
+.vr-val.given { color: var(--accent); }
+.vr-val.computed { color: var(--success); }
+.vr-val.hyp { color: #f9a8d4; font-weight: 800; }
+
+.value-row.is-hyp .vr-label::after {
+    content: " HIPOTENUSA";
+    display: inline-block;
+    margin-left: 0.4rem;
+    padding: 0.05rem 0.45rem;
+    border-radius: 999px;
+    background: rgba(244,114,182,0.2);
+    color: #f9a8d4;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    vertical-align: 2px;
+}
+
+/* Info hipotenusa */
+.hyp-info {
+    margin-bottom: 1rem;
+    padding: 0.65rem 1rem;
+    background: rgba(244,114,182,0.1);
+    border-left: 3px solid #f472b6;
+    border-radius: 6px;
+    font-size: 0.88rem;
+    color: var(--text);
+    line-height: 1.5;
+}
+
+.hyp-info strong { color: #f9a8d4; }
+.hyp-info .pill {
+    display: inline-block;
+    padding: 0.05rem 0.5rem;
+    border-radius: 999px;
+    background: rgba(251,191,36,0.2);
+    color: var(--warning);
+    font-weight: 700;
+    font-size: 0.8rem;
+    margin: 0 0.1rem;
+}
+
+/* Método */
+.method-box {
+    margin-bottom: 1.2rem;
+    padding: 0.7rem 1rem;
+    background: rgba(99,102,241,0.1);
+    border-left: 3px solid #818cf8;
+    border-radius: 6px;
+    font-size: 0.88rem;
+    color: var(--text-dim);
+}
+
+.method-box strong { color: #a5b4fc; }
+
+/* Tabla trig */
+.trig-section { margin-bottom: 1rem; }
+.trig-section h3 {
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0 0 0.6rem;
+}
+
+/* Error */
+.error-box {
+    padding: 1rem 1.25rem;
+    background: rgba(248,113,113,0.12);
+    border: 1px solid rgba(248,113,113,0.35);
+    border-radius: 10px;
+    color: var(--error);
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+/* Botones resultado */
+.form-actions { margin-top: 1.5rem; text-align: center; }
+.reset-btn {
+    padding: 0.65rem 2rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: all 0.15s;
+}
+.reset-btn:hover { background: var(--accent-strong); border-color: var(--accent); color: #fff; }
+
+@media (max-width: 600px) {
+    .case-grid { grid-template-columns: 1fr 1fr; }
+    .result-top { flex-direction: column; }
+    .result-diagram { width: 100%; }
+}
