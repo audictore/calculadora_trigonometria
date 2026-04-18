@@ -22,6 +22,132 @@
 
     <main class="tabla-main">
 
+        <!-- ── Visualización animada ─────────────────────────── -->
+        <section class="tab-section">
+            <h2 class="tab-title">Circunferencia Unitaria — Visualización Animada</h2>
+            <p class="tab-hint">
+                Cada razón trigonométrica es un <strong>segmento geométrico</strong> en la circunferencia unitaria.
+                Arrastra el control deslizante o presiona <strong>▶ Animar</strong> para verlas en movimiento.
+            </p>
+
+            <div class="anim-layout">
+
+                <!-- Canvas de la circunferencia -->
+                <div class="anim-canvas-wrap">
+                    <canvas id="unit-canvas" width="420" height="420"></canvas>
+                </div>
+
+                <!-- Panel lateral: controles + tarjetas de valores -->
+                <div class="anim-side">
+
+                    <!-- Ángulo actual -->
+                    <div class="anim-head">
+                        <span class="anim-deg-big" id="anim-deg-big">45.0°</span>
+                        <span class="anim-rad-small" id="anim-rad-small">0.7854 rad</span>
+                    </div>
+
+                    <!-- Slider -->
+                    <input type="range" id="angle-slider" class="anim-slider"
+                           min="0" max="359.5" step="0.5" value="45">
+
+                    <!-- Botones -->
+                    <div class="anim-btns">
+                        <button id="anim-play" class="anim-play-btn" type="button">▶ Animar</button>
+                        <div class="speed-pills">
+                            <button class="spd-btn" data-speed="0.3" type="button">×½</button>
+                            <button class="spd-btn active" data-speed="0.7" type="button">×1</button>
+                            <button class="spd-btn" data-speed="1.8" type="button">×2</button>
+                        </div>
+                    </div>
+
+                    <!-- Tarjetas de valores actuales -->
+                    <div class="anim-val-grid">
+                        <div class="avc" data-fn="sen">
+                            <span class="avc-lbl">sen</span>
+                            <span class="avc-num" id="v-sen">—</span>
+                            <span class="avc-tip">segmento vertical</span>
+                        </div>
+                        <div class="avc" data-fn="cos">
+                            <span class="avc-lbl">cos</span>
+                            <span class="avc-num" id="v-cos">—</span>
+                            <span class="avc-tip">segmento horizontal</span>
+                        </div>
+                        <div class="avc" data-fn="tan">
+                            <span class="avc-lbl">tan</span>
+                            <span class="avc-num" id="v-tan">—</span>
+                            <span class="avc-tip">vertical en x = 1</span>
+                        </div>
+                        <div class="avc" data-fn="cot">
+                            <span class="avc-lbl">cot</span>
+                            <span class="avc-num" id="v-cot">—</span>
+                            <span class="avc-tip">horizontal en y = 1</span>
+                        </div>
+                        <div class="avc" data-fn="sec">
+                            <span class="avc-lbl">sec</span>
+                            <span class="avc-num" id="v-sec">—</span>
+                            <span class="avc-tip">radio hasta tan(θ)</span>
+                        </div>
+                        <div class="avc" data-fn="csc">
+                            <span class="avc-lbl">csc</span>
+                            <span class="avc-num" id="v-csc">—</span>
+                            <span class="avc-tip">radio hasta cot(θ)</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Leyenda de colores -->
+            <div class="anim-legend">
+                <span class="al-chip" data-fn="sen">■ sen</span>
+                <span class="al-chip" data-fn="cos">■ cos</span>
+                <span class="al-chip" data-fn="tan">■ tan</span>
+                <span class="al-chip" data-fn="cot">■ cot</span>
+                <span class="al-chip" data-fn="sec">■ sec</span>
+                <span class="al-chip" data-fn="csc">■ csc</span>
+            </div>
+        </section>
+
+        <!-- ── Proyección animada sen / cos ──────────────────── -->
+        <section class="tab-section">
+            <h2 class="tab-title">Proyección Animada — sen θ y cos θ</h2>
+            <p class="tab-hint">
+                El punto <strong style="color:#fbbf24">P</strong> gira por la circunferencia unitaria.
+                La línea punteada <em>horizontal</em> proyecta su coordenada&nbsp;Y → forma la onda del <strong style="color:#f5d142">sen&thinsp;θ</strong> (hacia la derecha).
+                La línea punteada <em>vertical</em> proyecta su coordenada&nbsp;X → forma la onda del <strong style="color:#f5d142">cos&thinsp;θ</strong> (hacia abajo).
+            </p>
+            <div class="sc-wrap">
+                <canvas id="sc-canvas" width="680" height="640"></canvas>
+            </div>
+        </section>
+
+        <!-- ── Gráficas de tan, cot, sec y csc ───────────────── -->
+        <section class="tab-section">
+            <h2 class="tab-title">Gráficas de tan, cot, sec y csc</h2>
+            <p class="tab-hint">
+                La curva se traza progresivamente desde 0° hasta el ángulo actual.
+                Las <strong style="color:#f87171">líneas rojas</strong> indican asíntotas verticales.
+            </p>
+            <div class="wave-grid">
+                <div class="wave-card" data-fn="tan">
+                    <div class="wave-label" style="color:#fbbf24">y = tan(x)</div>
+                    <canvas class="wave-canvas" id="wc-tan" width="540" height="200"></canvas>
+                </div>
+                <div class="wave-card" data-fn="cot">
+                    <div class="wave-label" style="color:#a78bfa">y = cot(x)</div>
+                    <canvas class="wave-canvas" id="wc-cot" width="540" height="200"></canvas>
+                </div>
+                <div class="wave-card" data-fn="sec">
+                    <div class="wave-label" style="color:#f472b6">y = sec(x)</div>
+                    <canvas class="wave-canvas" id="wc-sec" width="540" height="200"></canvas>
+                </div>
+                <div class="wave-card" data-fn="csc">
+                    <div class="wave-label" style="color:#fb923c">y = csc(x)</div>
+                    <canvas class="wave-canvas" id="wc-csc" width="540" height="200"></canvas>
+                </div>
+            </div>
+        </section>
+
         <!-- ── Ángulos especiales ────────────────────────────── -->
         <section class="tab-section">
             <h2 class="tab-title">Ángulos Especiales</h2>
